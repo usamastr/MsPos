@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MsPos.Data;
+using MsPos.Models;
 
 namespace MsPos.Controllers
 {
@@ -13,8 +14,8 @@ namespace MsPos.Controllers
 
         public IActionResult Index()
         {
-            var objusers = _db.Users.ToList();
-            return View();
+            IEnumerable<User> objusers = _db.Users;
+            return View(objusers);
         }
 
     }

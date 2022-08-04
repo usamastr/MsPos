@@ -1,7 +1,40 @@
-﻿
+﻿@model IEnumerable<User>
 @{
     ViewData["Title"] = "Users";
 }
 
 <h1>Users</h1>
+<table class="table table-bordered tabletable-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            
+            <th>Name</th>
+            
+            <th>User Name</th>
+            
+            <th>Created On</th>
 
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>
+                    @obj.Id
+                </td>
+                <td>
+                    @obj.Name
+                </td>
+                <td>
+                    @obj.Username
+                </td>
+                <td>
+                    @obj.CreatedDate
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
