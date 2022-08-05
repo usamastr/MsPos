@@ -17,9 +17,11 @@ namespace MsPos.Controllers
             try
             {
                 IEnumerable<User> objusers = _db.Users;
-                if (objusers != null )
-               
-                return View(objusers);
+                if (objusers != null)
+                {
+                    if (objusers.Any())
+                        return View(objusers);
+                }
             }
             catch (Exception ex)
             {

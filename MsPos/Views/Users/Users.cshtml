@@ -23,7 +23,8 @@
 
     </thead>
     <tbody>
-        @foreach (var obj in Model)
+       @if(Model !=null)
+       @foreach (var obj in Model)
         {
             <tr>
                 <td>
