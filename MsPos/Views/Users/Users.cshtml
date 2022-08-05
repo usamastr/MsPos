@@ -2,8 +2,12 @@
 @{
     ViewData["Title"] = "Users";
 }
+<h2>Users Management</h2>
 
-<h1>Users</h1>
+<div class="container p-4">
+    <a asp-controller="Users" asp-action="Create" class="btn btn-success" >Add Users</a>
+</div>
+
 <table class="table table-bordered tabletable-striped" style="width:100%">
     <thead>
         <tr>
@@ -14,7 +18,7 @@
             <th>User Name</th>
             
             <th>Created On</th>
-
+            <th>Actions</th>
         </tr>
 
     </thead>
@@ -33,6 +37,12 @@
                 </td>
                 <td>
                     @obj.CreatedDate
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Users" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+                        <a asp-controller="Users" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-Danger mx-2"><i class="bi bi-trash-fill"></i>Delete</a>
+                        </div>
                 </td>
             </tr>
         }

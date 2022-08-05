@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using MsPos.Data;
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MsPosDbcontext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 
 var app = builder.Build();
 
