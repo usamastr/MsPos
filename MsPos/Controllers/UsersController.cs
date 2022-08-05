@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MsPos.Data;
 using MsPos.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MsPos.Controllers
 {
@@ -108,6 +110,71 @@ namespace MsPos.Controllers
             return RedirectToAction("Users");
             
            
+        }
+
+
+        public class Credentials
+        {
+            public string UserName { get; set; }
+            public string Password { get; set; }
+
+        }
+        [HttpPost]
+        public Task<ActionResult<User>> LoginUser([FromBody] Credentials login)
+        {
+            try
+            {
+                string pswd_string = Encryption.EncryptToSHA256(login.Password, login.UserName.ToUpper());
+
+                var loggedInUser = (from e in _db.Users
+                             where e.Username == login.UserName && e.Password = pswd_string
+                                    select e).FirstOrDefault();
+
+
+
+                if (loggedInUser.UserId != 0)
+                {                    
+                    _user.UserId = loggedInUser.UserId;
+                    _user.DisplayName = loggedInUser.UserName;                    
+
+                    return Task.FromResult(loggedInUser);
+                }                
+            }
+            catch (Exception e)
+            {
+                dynamic response = new System.Dynamic.ExpandoObject();
+                response.Message = e.Message;
+                response.StatusCode = 401;
+                return View(login);
+            }
+        }
+
+        public class Encryption
+        {
+            public static string EncryptToSHA256(string data, string salt)
+            {
+                if (salt != null)
+                {
+                    salt = salt.ToLower();
+                    data += salt;
+                }
+
+                SHA256 hasher = SHA256.Create();
+
+                byte[] hashedData = hasher.ComputeHash(Encoding.Unicode.GetBytes(data));
+
+                StringBuilder sb = new StringBuilder(hashedData.Length * 2);
+
+                foreach (byte b in hashedData)
+                {
+
+                    sb.AppendFormat("{0:x2}", b);
+
+                }
+
+                return sb.ToString();
+
+            }
         }
     }
 }

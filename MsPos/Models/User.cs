@@ -15,6 +15,8 @@ namespace MsPos.Models
         public DateTime CreatedDate { get; set; }=DateTime.Now;
         public DateTime LastModifiedDate { get; set; }
         public string Email { get; set; }
+        public string Role { get; set; }
+        public Boolean Status { get; set; }
         public string Phone { get; set; }
         [Required]
         public Boolean IsAdmin { get; set; }
