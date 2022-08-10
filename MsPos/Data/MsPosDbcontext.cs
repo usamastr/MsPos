@@ -9,7 +9,7 @@ namespace MsPos.Data
         {
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<MsPos.Models.Product>? Product { get; set; }
+        public DbSet<Product> Product { get; set; }
 
 
     }

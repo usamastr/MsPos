@@ -18,7 +18,7 @@ namespace MsPos.Models
         [DisplayName("Purchase Price")]
         public int PurchasePrice { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; } = DateTime.Now;
         public string Packing { get; set; }
         public string Type { get; set; }
         public string Description  { get; set; }

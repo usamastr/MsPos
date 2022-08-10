@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MsPos.Data;
 using MsPos.Models;
-using System.Security.Cryptography;
-using System.Text;
+using System;
+using System.Web;
 
 namespace MsPos.Controllers
 {
@@ -56,7 +56,7 @@ namespace MsPos.Controllers
             return View(obj);
         }
         //Get
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Int64? id)
         {
             if (id == null || id == 0)
             {
@@ -112,69 +112,36 @@ namespace MsPos.Controllers
            
         }
 
-
-        public class Credentials
-        {
-            public string UserName { get; set; }
-            public string Password { get; set; }
-
-        }
-        [HttpPost]
-        public Task<ActionResult<User>> LoginUser([FromBody] Credentials login)
+        public IActionResult Login(User obj)
         {
             try
             {
-                string pswd_string = Encryption.EncryptToSHA256(login.Password, login.UserName.ToUpper());
+                var dataItem = _db.Users.Where(x => x.Username == obj.Username && x.Password == obj.Password).SingleOrDefault();
 
-                var loggedInUser = (from e in _db.Users
-                             where e.Username == login.UserName && e.Password = pswd_string
-                                    select e).FirstOrDefault();
+                bool isLogged = true;
 
+                if (dataItem != null)
 
-
-                if (loggedInUser.UserId != 0)
-                {                    
-                    _user.UserId = loggedInUser.UserId;
-                    _user.DisplayName = loggedInUser.UserName;                    
-
-                    return Task.FromResult(loggedInUser);
-                }                
-            }
-            catch (Exception e)
-            {
-                dynamic response = new System.Dynamic.ExpandoObject();
-                response.Message = e.Message;
-                response.StatusCode = 401;
-                return View(login);
-            }
-        }
-
-        public class Encryption
-        {
-            public static string EncryptToSHA256(string data, string salt)
-            {
-                if (salt != null)
                 {
-                    salt = salt.ToLower();
-                    data += salt;
+                    
+                    isLogged = true;
+                    return RedirectToAction("Index","Home");
                 }
 
-                SHA256 hasher = SHA256.Create();
+                else
 
-                byte[] hashedData = hasher.ComputeHash(Encoding.Unicode.GetBytes(data));
-
-                StringBuilder sb = new StringBuilder(hashedData.Length * 2);
-
-                foreach (byte b in hashedData)
                 {
 
-                    sb.AppendFormat("{0:x2}", b);
-
+                    isLogged = false;
+                    return RedirectToAction("Login");
                 }
-
-                return sb.ToString();
-
             }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+                return RedirectToAction("Login");
+            }
+            
         }
     }
 }

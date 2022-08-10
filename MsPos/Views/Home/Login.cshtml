@@ -1,13 +1,49 @@
-﻿@{
+﻿@model MsPos.Models.User
+@{
     ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Login</h1>
-    <div class="container container-md">
-  <label class="form-control">Username</label> <input class="form-control" type="text" id="Username" placeholder="Username"/><br />
-  <label class="form-control">Password</label> <input class="form-control" type="password" id="Password" placeholder="Password"/>
-  <br />
-  <button class="btn btn-primary"id="Loginbtn">Login</button>
-  </div>
-</div>
+<div class="h-100 mt-60">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                    <div class="text-center mb-3">
+                                        <img width="55%" style="margin-left: 18px;" src="" alt="">
+                                    </div>
+                                    <h4 class="text-center mb-4">Sign in your account</h4>
+                                    <form asp-controller="Users" asp-action="Login">
+                                        <div class="form-group">
+                                            <label class="mb-1"  asp-for="Username"><strong>User Name</strong></label>
+                                            <input type="text" asp-for="Username" class="form-control" value="" >
+                                           
+                <span asp-validation-for="Username" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1" asp-for="Password"><strong>Password</strong></label>
+                                            <input type="password" asp-for="Password" class="form-control" value="" >
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                       @* <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                            <div class="form-group">
+                                            <div class="custom-control custom-checkbox ml-1">
+                                                    <input  type="checkbox" class="custom-control-input" id="basic_checkbox_1">
+                                                    <label class="custom-control-label" for="basic_checkbox_1">Remember me</label>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <a routerLink="/forget-password">Forget Password?</a>
+                                            </div>
+                                        </div>*@
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block" >Sign In</button>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

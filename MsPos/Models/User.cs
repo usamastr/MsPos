@@ -13,7 +13,7 @@ namespace MsPos.Models
         [Required]
         public string Password { get; set; }
         public DateTime CreatedDate { get; set; }=DateTime.Now;
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }= DateTime.Now;
         public string Email { get; set; }
         public string Role { get; set; }
         public Boolean Status { get; set; }
