@@ -17,8 +17,7 @@ namespace MsPos.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public Boolean Status { get; set; }
-        public string Phone { get; set; }
-        [Required]
+        public string Phone { get; set; }        
         public Boolean IsAdmin { get; set; }
         
 

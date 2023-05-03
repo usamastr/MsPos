@@ -38,10 +38,11 @@
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
 
-
-
-
-
+        <div class="mb-3">
+            <label asp-for="IsAdmin"></label>
+            <input asp-for="IsAdmin" type="checkbox"/>
+            <span asp-validation-for="IsAdmin" class="text-danger"></span>
+        </div>
 
         <button type="submit" class="btn btn-primary " style="width:150px">Add</button>
         <a asp-controller="Users" asp-action="Users" class="btn btn-secondary " style="width:150px">Back</a>

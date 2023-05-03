@@ -19,6 +19,7 @@ namespace MsPos.Controllers
             _context = context;
         }
 
+
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -65,13 +66,12 @@ namespace MsPos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,ProductName,SalePrice,PurchasePrice,CreatedDate,Packing,Type,Description,ExpiryDate,Category,Discount")] Product product)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(product);
+            
+            
         }
 
         // GET: Products/Edit/5

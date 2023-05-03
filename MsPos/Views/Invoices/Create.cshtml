@@ -1,0 +1,80 @@
+﻿@using MsPos.Models
+@model MsPos.Models.Invoice
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+ 
+
+<h1>Create</h1>
+
+<h4>Invoice</h4>
+<hr />
+
+    <div class="col-sm-12 ">
+        <form asp-action="Create">
+            <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-sm-2">
+                <label asp-for="InvoiceNumber" class="control-label "></label>
+                <input disabled="disabled" asp-for="InvoiceNumber"  class="form-control " />
+                <span asp-validation-for="InvoiceNumber" class="text-danger "></span>
+            </div>
+            <div class="form-group col-sm-2">
+                <label asp-for="CustomerId" class="control-label"> Customer</label>
+                <input asp-for="CustomerId" class="form-control " />
+                <span asp-validation-for="CustomerId" class="text-danger "></span>
+            </div>   
+           
+            <div class="form-group col-sm-2">
+                <label asp-for="CreatedDate" class="control-label "></label>
+                <input asp-for="CreatedDate" class="form-control" value="@DateTime.Today" />
+                <span asp-validation-for="CreatedDate" class="text-danger "></span>
+            </div>
+          
+            <div class="form-group col-sm-2">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div> 
+           
+            <div class="form-group col-sm-2">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-2">
+                <label asp-for="PaymentMethod" class="control-label"></label>
+                <input asp-for="PaymentMethod" class="form-control" />
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-2">
+          
+
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            </div>
+        </form>
+
+
+        
+    </div>
+
+    <div>
+        <div class="row">  
+         
+
+
+
+    </div>
+    </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

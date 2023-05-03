@@ -18,7 +18,7 @@ namespace MsPos.Controllers
         {
             try
             {
-                IEnumerable<User> objusers = _db.Users;
+                IEnumerable<User> objusers = _db.User;
                 if (objusers != null)
                 {
                     if (objusers.Any())
@@ -48,7 +48,7 @@ namespace MsPos.Controllers
                 ModelState.AddModelError("CustomError", "Username should not be Same as Password.");
             }
             if (ModelState.IsValid) { 
-            _db.Users.Add(obj);
+            _db.User.Add(obj);
             _db.SaveChanges();
                 TempData["success"] = "User Created Successfully";
             return RedirectToAction("Users");
@@ -62,7 +62,7 @@ namespace MsPos.Controllers
             {
                 return NotFound();
             }
-            var userFromDb = _db.Users.Find(id);
+            var userFromDb = _db.User.Find(id);
             if (userFromDb == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace MsPos.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Users.Update(obj);
+                _db.User.Update(obj);
                 _db.SaveChanges();
                 TempData["success"] = "User Updated Successfully";
                 return RedirectToAction("Users");
@@ -98,13 +98,13 @@ namespace MsPos.Controllers
         public IActionResult Delete(int? id)
         {
            
-            var obj = _db.Users.Find(id);
+            var obj = _db.User.Find(id);
             if(obj == null)
             {
                 return NotFound();
             }
 
-            _db.Users.Remove(obj);
+            _db.User.Remove(obj);
                 _db.SaveChanges();
             TempData["success"] = "User Deleted Successfully";
             return RedirectToAction("Users");
@@ -116,15 +116,15 @@ namespace MsPos.Controllers
         {
             try
             {
-                var dataItem = _db.Users.Where(x => x.Username == obj.Username && x.Password == obj.Password).SingleOrDefault();
+                var dataItem = _db.User.Where(x => x.Username == obj.Username && x.Password == obj.Password).SingleOrDefault();
 
                 bool isLogged = true;
 
                 if (dataItem != null)
 
-                {
-                    
+                {                    
                     isLogged = true;
+                    
                     return RedirectToAction("Index","Home");
                 }
 
